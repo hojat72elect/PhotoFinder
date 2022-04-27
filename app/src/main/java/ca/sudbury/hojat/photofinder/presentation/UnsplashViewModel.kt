@@ -1,9 +1,7 @@
 package ca.sudbury.hojat.photofinder.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.framework.PhotoDataSourceImpl
 import kotlinx.coroutines.Dispatchers
 

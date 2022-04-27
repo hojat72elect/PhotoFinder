@@ -2,15 +2,10 @@ package ca.sudbury.hojat.photofinder.framework
 
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
-import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
-import ca.sudbury.hojat.photofinder.framework.model.UnsplashJSON
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -41,28 +36,32 @@ class PhotoDataSourceImpl(
             .build()
     }
 
-    suspend fun getAll():List<Photo> {
+    suspend fun getAll(): List<Photo> {
 
         val photosList = mutableListOf<Photo>()
-        val retService = getRetrofitInstance().create(NetworkModel::class.java)
-        val response = retService.getPhotos()
-        val JSONBody = response.body()?.listIterator()
 
-            if (JSONBody != null) {
-                while (JSONBody.hasNext()) {
-                    val nextUnsplashPhoto = JSONBody.next()
-                    val nextPhoto = Photo(
-                        nextUnsplashPhoto.id,
-                        nextUnsplashPhoto.likes ?: 0,
-                        nextUnsplashPhoto.description,
-                        nextUnsplashPhoto.urls?.full,
-                        nextUnsplashPhoto.urls?.regular
-                    )
+        val JSONBody = getRetrofitInstance()
+            .create(NetworkModel::class.java)
+            .getPhotos()
+            .body()
+            ?.listIterator()
 
-                    photosList.add(nextPhoto)
 
-                }
+        if (JSONBody != null) {
+            while (JSONBody.hasNext()) {
+                val nextUnsplashPhoto = JSONBody.next()
+                val nextPhoto = Photo(
+                    nextUnsplashPhoto.id,
+                    nextUnsplashPhoto.likes ?: 0,
+                    nextUnsplashPhoto.description,
+                    nextUnsplashPhoto.urls?.full,
+                    nextUnsplashPhoto.urls?.regular
+                )
+
+                photosList.add(nextPhoto)
+
             }
-       return photosList
+        }
+        return photosList
     }
 }

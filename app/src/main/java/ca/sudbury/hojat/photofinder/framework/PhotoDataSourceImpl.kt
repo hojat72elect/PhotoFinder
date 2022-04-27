@@ -1,6 +1,6 @@
 package ca.sudbury.hojat.photofinder.framework
 
-import android.util.Log
+
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
@@ -20,8 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class PhotoDataSourceImpl(
     val owner: LifecycleOwner
-) :
-    PhotoDataSource {
+) {
 
     fun getRetrofitInstance(): Retrofit {
 
@@ -42,23 +41,16 @@ class PhotoDataSourceImpl(
             .build()
     }
 
-    override fun getAll(): List<Photo> {
+    suspend fun getAll():List<Photo> {
 
         val photosList = mutableListOf<Photo>()
         val retService = getRetrofitInstance().create(NetworkModel::class.java)
-        val responseLiveData: LiveData<Response<UnsplashJSON>> = liveData {
-
-            val response = retService.getPhotos()
-            emit(response)
-        }
-
-        responseLiveData.observe(owner) {
-            val JSONBody = it.body()?.listIterator()
+        val response = retService.getPhotos()
+        val JSONBody = response.body()?.listIterator()
 
             if (JSONBody != null) {
                 while (JSONBody.hasNext()) {
                     val nextUnsplashPhoto = JSONBody.next()
-                    Log.d("next_unsplash_photo", nextUnsplashPhoto.toString())
                     val nextPhoto = Photo(
                         nextUnsplashPhoto.id,
                         nextUnsplashPhoto.likes ?: 0,
@@ -67,16 +59,10 @@ class PhotoDataSourceImpl(
                         nextUnsplashPhoto.urls?.regular
                     )
 
-                    Log.d("next_photo", nextPhoto.toString())
                     photosList.add(nextPhoto)
 
                 }
-            } else {
-                Log.e("error_JSON_body_empty", "The JSON body is empty")
             }
-            Log.d("PhotoDataSourceImpl", photosList.toString())
-
-        }
-        return photosList
+       return photosList
     }
 }

@@ -60,8 +60,11 @@ class MainActivity : AppCompatActivity() {
 
         val photos = unsplashViewModel.getAllPhotos()
         Log.d("TAG_photos_list", photos.toString())
-        adapter.setList(photos)
-        adapter.notifyDataSetChanged()
+        photos.observe(this) {
+            adapter.setList(it)
+            adapter.notifyDataSetChanged()
+        }
+
 
     }
 

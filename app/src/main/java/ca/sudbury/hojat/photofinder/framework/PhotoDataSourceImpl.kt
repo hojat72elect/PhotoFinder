@@ -1,5 +1,6 @@
 package ca.sudbury.hojat.photofinder.framework
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
@@ -56,19 +57,25 @@ class PhotoDataSourceImpl(
 
             if (JSONBody != null) {
                 while (JSONBody.hasNext()) {
-                    val nextPhoto = JSONBody.next()
-                    photosList.add(
-                        Photo(
-                            nextPhoto.id,
-                            nextPhoto.likes ?: 0,
-                            nextPhoto.description,
-                            nextPhoto.urls?.full,
-                            nextPhoto.urls?.regular
-                        )
+                    val nextUnsplashPhoto = JSONBody.next()
+                    Log.d("next_unsplash_photo", nextUnsplashPhoto.toString())
+                    val nextPhoto = Photo(
+                        nextUnsplashPhoto.id,
+                        nextUnsplashPhoto.likes ?: 0,
+                        nextUnsplashPhoto.description,
+                        nextUnsplashPhoto.urls?.full,
+                        nextUnsplashPhoto.urls?.regular
                     )
 
+                    Log.d("next_photo", nextPhoto.toString())
+                    photosList.add(nextPhoto)
+
                 }
+            } else {
+                Log.e("error_JSON_body_empty", "The JSON body is empty")
             }
+            Log.d("PhotoDataSourceImpl", photosList.toString())
+
         }
         return photosList
     }

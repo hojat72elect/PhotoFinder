@@ -1,9 +1,14 @@
 package ca.sudbury.hojat.photofinder.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.R
 import ca.sudbury.hojat.photofinder.databinding.ActivityMainBinding
 import ca.sudbury.hojat.photofinder.framework.NetworkModel
@@ -15,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var retService: NetworkModel
     private lateinit var unsplashViewModel: UnsplashViewModel
+    private lateinit var adapter: PhotosRecyclerViewAdapter
     private val TAG = "Main_Activity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,29 +42,32 @@ class MainActivity : AppCompatActivity() {
         // (this is a good way of getting rid of memory leaks).
         binding.lifecycleOwner = this
 
-        binding.textViewLog.text = "I have added the data binding to this project!"
+//        binding.textViewLog.text = "I have added the data binding to this project!"
 
-//        retService = PhotoDataSourceImpl
-//            .getRetrofitInstance()
-//            .create(NetworkModel::class.java)
-//
-//        getPhotos()
+        initRecyclerView()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initRecyclerView() {
+
+        binding.photosRecyclerView.layoutManager =
+            LinearLayoutManager(this)// responsible for measuring, positioning and recycling item views.
+
+        adapter = PhotosRecyclerViewAdapter { selectedItem: Photo ->
+            listItemClicked(selectedItem)
+        }
+        binding.photosRecyclerView.adapter = adapter // loading the adapter for our recycler view
+
+        val photos = unsplashViewModel.getAllPhotos()
+        Log.d("TAG_photos_list", photos.toString())
+        adapter.setList(photos)
+        adapter.notifyDataSetChanged()
 
     }
 
-//    private fun getPhotos() {
-//        val responseLiveData: LiveData<Response<UnsplashJSON>> = liveData {
-//
-//            val response = retService.getPhotos()
-//            emit(response)
-//        }
-//        responseLiveData.observe(this) {
-//            val JSONBody = it.body()?.listIterator()
-//            if (JSONBody != null) {
-//                while (JSONBody.hasNext()) {
-//                    Log.i(TAG, JSONBody.next().urls?.regular.toString())
-//                }
-//            }
-//        }
-//    }
+    private fun listItemClicked(photo: Photo) {
+        Toast.makeText(this, "photo selected", Toast.LENGTH_SHORT).show()
+
+    }
+
 }

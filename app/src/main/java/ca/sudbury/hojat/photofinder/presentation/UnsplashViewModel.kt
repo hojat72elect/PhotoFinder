@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 class UnsplashViewModel(private val repository: PhotoDataSourceImpl) : ViewModel() {
 
     fun getAllPhotos() = liveData(Dispatchers.IO) {
-        emit(repository.getAllPhotos())
+        emit(repository.getPhotos())
     }
 
 }

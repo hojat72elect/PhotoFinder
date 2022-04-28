@@ -3,7 +3,7 @@ package ca.sudbury.hojat.photofinder.framework
 
 import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
-import ca.sudbury.hojat.photofinder.framework.web.RemoteDataStore
+import ca.sudbury.hojat.photofinder.framework.web.RemoteDataSource
 import ca.sudbury.hojat.photofinder.toPhoto
 
 /**
@@ -11,12 +11,12 @@ import ca.sudbury.hojat.photofinder.toPhoto
  * contact the author at "https://github.com/hojat72elect"
  */
 class PhotoDataSourceImpl() : PhotoDataSource {
-    override suspend fun getAllPhotos(): List<Photo> {
+    override suspend fun getPhotos(): List<Photo> {
 
         val photosList = mutableListOf<Photo>()
 
-        val JSONBody = RemoteDataStore.getRetrofitInstance()
-            .create(RemoteDataStore::class.java)
+        val JSONBody = RemoteDataSource.getRetrofitInstance()
+            .create(RemoteDataSource::class.java)
             .getPhotos()
             .body()
             ?.listIterator()
@@ -29,4 +29,9 @@ class PhotoDataSourceImpl() : PhotoDataSource {
         }
         return photosList
     }
+
+    override suspend fun getPhoto(uuid: String): Photo {
+        TODO("Not yet implemented")
+    }
+
 }

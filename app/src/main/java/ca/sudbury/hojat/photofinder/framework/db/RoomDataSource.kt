@@ -12,7 +12,7 @@ import androidx.room.Query
  * Contact the author at "https://github.com/hojat72elect"
  */
 @Dao
-interface RoomDataStore {
+interface RoomDataSource {
 
     @Insert(onConflict = REPLACE)
     suspend fun insertPhoto(photo: PhotoEntity)

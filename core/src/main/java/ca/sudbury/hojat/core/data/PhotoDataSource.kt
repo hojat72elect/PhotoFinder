@@ -9,5 +9,8 @@ import ca.sudbury.hojat.core.domain.Photo
 interface PhotoDataSource {
 
     // get a List of all the photos to be displayed in main page.
-    suspend fun getAllPhotos(): List<Photo>
+    suspend fun getPhotos(): List<Photo>
+
+    suspend fun getPhoto(uuid: String): Photo
+
 }

@@ -4,6 +4,7 @@ package ca.sudbury.hojat.photofinder.framework
 import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.framework.web.NetworkModel
+import ca.sudbury.hojat.photofinder.toPhoto
 
 /**
  * Created by Hojat Ghasemi at 2022-04-24
@@ -22,17 +23,8 @@ class PhotoDataSourceImpl() : PhotoDataSource {
 
         if (JSONBody != null) {
             while (JSONBody.hasNext()) {
-                val nextUnsplashPhoto = JSONBody.next()
-                val nextPhoto = Photo(
-                    nextUnsplashPhoto.id,
-                    nextUnsplashPhoto.likes ?: 0,
-                    nextUnsplashPhoto.description,
-                    nextUnsplashPhoto.urls?.full,
-                    nextUnsplashPhoto.urls?.regular
-                )
-
+                val nextPhoto = JSONBody.next().toPhoto()
                 photosList.add(nextPhoto)
-
             }
         }
         return photosList

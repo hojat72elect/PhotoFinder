@@ -11,14 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.R
 import ca.sudbury.hojat.photofinder.databinding.ActivityMainBinding
-import ca.sudbury.hojat.photofinder.framework.NetworkModel
 import ca.sudbury.hojat.photofinder.framework.PhotoDataSourceImpl
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var retService: NetworkModel
     private lateinit var unsplashViewModel: UnsplashViewModel
     private lateinit var adapter: PhotosRecyclerViewAdapter
     private val TAG = "Main_Activity"
@@ -31,18 +29,15 @@ class MainActivity : AppCompatActivity() {
             this, R.layout.activity_main
         ) // for easy connection of Activity with xml files.
 
-        // The builder for ViewModel
-        val factory = UnsplashViewModelFactory(PhotoDataSourceImpl(this))
-        unsplashViewModel = ViewModelProvider(this, factory).get(
-            UnsplashViewModel::class.java
-        )
+        // Creating the view model
+        unsplashViewModel =
+            ViewModelProvider(this, UnsplashViewModelFactory(PhotoDataSourceImpl())).get(
+                UnsplashViewModel::class.java
+            )
 
+        // the binding between ViewModel and UI is controlled by the lifecycle of this Activity
         binding.myViewModel = unsplashViewModel
-        // but this binding exists just as long as this Activity lives
-        // (this is a good way of getting rid of memory leaks).
         binding.lifecycleOwner = this
-
-//        binding.textViewLog.text = "I have added the data binding to this project!"
 
         initRecyclerView()
     }
@@ -53,19 +48,15 @@ class MainActivity : AppCompatActivity() {
         binding.photosRecyclerView.layoutManager =
             LinearLayoutManager(this)// responsible for measuring, positioning and recycling item views.
 
-        adapter = PhotosRecyclerViewAdapter { selectedItem: Photo ->
-            listItemClicked(selectedItem)
-        }
+        adapter = PhotosRecyclerViewAdapter { selectedItem: Photo -> listItemClicked(selectedItem) }
         binding.photosRecyclerView.adapter = adapter // loading the adapter for our recycler view
 
         val photos = unsplashViewModel.getAllPhotos()
-        Log.d("TAG_photos_list", photos.toString())
+        Log.d(TAG, photos.toString())
         photos.observe(this) {
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         }
-
-
     }
 
     private fun listItemClicked(photo: Photo) {

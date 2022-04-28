@@ -1,51 +1,23 @@
 package ca.sudbury.hojat.photofinder.framework
 
 
-import androidx.lifecycle.LifecycleOwner
+import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
-import com.google.gson.GsonBuilder
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by Hojat Ghasemi at 2022-04-24
  * contact the author at "https://github.com/hojat72elect"
  */
-class PhotoDataSourceImpl(
-    val owner: LifecycleOwner
-) {
-
-    fun getRetrofitInstance(): Retrofit {
-
-        // The logging interceptor for Retrofit
-        val interceptor = HttpLoggingInterceptor().apply {
-            this.level = HttpLoggingInterceptor.Level.BODY
-        }
-
-        // The builder class for OkHttpClient
-        val client = OkHttpClient.Builder().apply {
-            this.addInterceptor(interceptor)
-        }.build()
-
-        return Retrofit.Builder()
-            .baseUrl(NetworkModel.BASE_URL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .build()
-    }
-
-    suspend fun getAll(): List<Photo> {
+class PhotoDataSourceImpl() : PhotoDataSource {
+    override suspend fun getAllPhotos(): List<Photo> {
 
         val photosList = mutableListOf<Photo>()
 
-        val JSONBody = getRetrofitInstance()
+        val JSONBody = NetworkModel.getRetrofitInstance()
             .create(NetworkModel::class.java)
             .getPhotos()
             .body()
             ?.listIterator()
-
 
         if (JSONBody != null) {
             while (JSONBody.hasNext()) {

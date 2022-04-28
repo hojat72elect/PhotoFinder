@@ -1,6 +1,6 @@
-package ca.sudbury.hojat.photofinder.framework
+package ca.sudbury.hojat.photofinder.framework.web
 
-import ca.sudbury.hojat.photofinder.framework.model.UnsplashJSON
+import ca.sudbury.hojat.photofinder.framework.web.data.UnsplashJSON
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

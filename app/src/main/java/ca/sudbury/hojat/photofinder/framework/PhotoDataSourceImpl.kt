@@ -3,6 +3,7 @@ package ca.sudbury.hojat.photofinder.framework
 
 import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
+import ca.sudbury.hojat.photofinder.framework.web.NetworkModel
 
 /**
  * Created by Hojat Ghasemi at 2022-04-24

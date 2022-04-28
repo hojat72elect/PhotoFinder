@@ -9,6 +9,7 @@ java {
 }
 
 dependencies {
+    // coroutine dependency for non-Android projects.
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 
 }

@@ -1,8 +1,8 @@
-package ca.sudbury.hojat.photofinder.framework.model
+package ca.sudbury.hojat.photofinder.framework.web.data
 
 import com.google.gson.annotations.SerializedName
 
-data class LinksX(
+data class LinksXX(
     @SerializedName("followers")
     val followers: String?,
     @SerializedName("following")

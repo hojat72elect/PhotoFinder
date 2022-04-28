@@ -13,7 +13,7 @@ import retrofit2.http.GET
  * Created by Hojat Ghasemi at 2022-04-24
  * Contact the author at "https://github.com/hojat72elect"
  */
-interface NetworkModel {
+interface RemoteDataStore {
 
 
     // I have to define this function with suspend; otherwise it threw some weird errors.

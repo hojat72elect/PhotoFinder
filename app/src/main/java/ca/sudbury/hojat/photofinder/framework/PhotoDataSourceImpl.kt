@@ -3,7 +3,7 @@ package ca.sudbury.hojat.photofinder.framework
 
 import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
-import ca.sudbury.hojat.photofinder.framework.web.NetworkModel
+import ca.sudbury.hojat.photofinder.framework.web.RemoteDataStore
 import ca.sudbury.hojat.photofinder.toPhoto
 
 /**
@@ -15,8 +15,8 @@ class PhotoDataSourceImpl() : PhotoDataSource {
 
         val photosList = mutableListOf<Photo>()
 
-        val JSONBody = NetworkModel.getRetrofitInstance()
-            .create(NetworkModel::class.java)
+        val JSONBody = RemoteDataStore.getRetrofitInstance()
+            .create(RemoteDataStore::class.java)
             .getPhotos()
             .body()
             ?.listIterator()

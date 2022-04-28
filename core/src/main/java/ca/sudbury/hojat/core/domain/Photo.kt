@@ -10,4 +10,5 @@ data class Photo(
     val description: String?,
     val url_full: String?,
     val url_regular: String?,
+    val photographer: Photographer? = null
 )

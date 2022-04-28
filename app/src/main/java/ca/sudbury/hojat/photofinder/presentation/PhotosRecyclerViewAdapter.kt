@@ -53,7 +53,7 @@ class PhotoViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(bi
         Glide.with(binding.root.context)
             .load(Uri.parse(photo.url_regular))
             .into(binding.imageView)
-        binding.textViewDescription.text = photo.description
+
         binding.listItemLayout.setOnClickListener {
             clickListener(photo)
         }

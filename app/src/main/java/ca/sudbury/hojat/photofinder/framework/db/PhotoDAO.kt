@@ -1,6 +1,5 @@
 package ca.sudbury.hojat.photofinder.framework.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -23,7 +22,7 @@ interface PhotoDAO {
     suspend fun deletePhoto(photo: PhotoEntity)
 
     @Query("SELECT * FROM photo_data_table")
-    fun getAllPhotos(): LiveData<List<PhotoEntity>>
+    fun getAllPhotos(): List<PhotoEntity>
 
     @Query("SELECT * FROM photo_data_table WHERE photo_uuid = :uuid")
     fun getPhoto(uuid: String): PhotoEntity

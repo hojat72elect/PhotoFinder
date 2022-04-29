@@ -12,7 +12,7 @@ import ca.sudbury.hojat.photofinder.toPhotoEntity
  */
 class PhotoRepository(
     private val roomDataSource: PhotoDAO,
-    private val remoteDataSource: RemoteDataSource
+//    private val remoteDataSource: RemoteDataSource
 ) {
 
     fun getAllRoomPhotos() = roomDataSource.getAllPhotos()
@@ -23,5 +23,5 @@ class PhotoRepository(
 
     suspend fun addRoomPhoto(photo: Photo) = roomDataSource.insertPhoto(photo.toPhotoEntity())
 
-    suspend fun getAllRemotePhotos() = remoteDataSource.getPhotos()
+//    suspend fun getAllRemotePhotos() = remoteDataSource.getPhotos()
 }

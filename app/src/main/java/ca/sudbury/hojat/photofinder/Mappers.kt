@@ -3,6 +3,7 @@ package ca.sudbury.hojat.photofinder
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.core.domain.Photographer
 import ca.sudbury.hojat.core.domain.SocialHandles
+import ca.sudbury.hojat.photofinder.framework.db.PhotoEntity
 import ca.sudbury.hojat.photofinder.framework.web.data.SocialX
 import ca.sudbury.hojat.photofinder.framework.web.data.UnsplashPhoto
 import ca.sudbury.hojat.photofinder.framework.web.data.User
@@ -43,7 +44,6 @@ fun User.toPhotographer(): Photographer {
 
 }
 
-
 fun SocialX.toSocialHandles(): SocialHandles {
     return SocialHandles(
         this.instagram_username,
@@ -51,5 +51,25 @@ fun SocialX.toSocialHandles(): SocialHandles {
         this.portfolio_url,
         this.twitter_username.toString()
 
+    )
+}
+
+fun Photo.toPhotoEntity(): PhotoEntity {
+    return PhotoEntity(
+        this.id ?: "",
+        this.likes,
+        this.description ?: "",
+        this.url_full ?: "",
+        this.url_regular ?: ""
+    )
+}
+
+fun PhotoEntity.toPhoto(): Photo {
+    return Photo(
+        this.uuid,
+        this.likes,
+        this.description,
+        this.url_full,
+        this.url_regular
     )
 }

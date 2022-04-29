@@ -10,9 +10,11 @@ import androidx.room.Query
 /**
  * Created by Hojat Ghasemi at 2022-04-28
  * Contact the author at "https://github.com/hojat72elect"
+ *
+ * just a DAO for our photos in the Room database.
  */
 @Dao
-interface RoomDataSource {
+interface PhotoDAO {
 
     @Insert(onConflict = REPLACE)
     suspend fun insertPhoto(photo: PhotoEntity)

@@ -2,7 +2,6 @@ package ca.sudbury.hojat.photofinder.framework
 
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.framework.db.PhotoDAO
-import ca.sudbury.hojat.photofinder.framework.web.RemoteDataSource
 import ca.sudbury.hojat.photofinder.toPhoto
 import ca.sudbury.hojat.photofinder.toPhotoEntity
 

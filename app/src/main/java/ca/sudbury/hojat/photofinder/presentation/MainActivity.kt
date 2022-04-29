@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.R
 import ca.sudbury.hojat.photofinder.databinding.ActivityMainBinding
-import ca.sudbury.hojat.photofinder.framework.PhotoDataSourceImpl
+import ca.sudbury.hojat.photofinder.framework.RemotePhotoDataSource
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         // Creating the view model
         unsplashViewModel =
-            ViewModelProvider(this, UnsplashViewModelFactory(PhotoDataSourceImpl())).get(
+            ViewModelProvider(this, UnsplashViewModelFactory(RemotePhotoDataSource())).get(
                 UnsplashViewModel::class.java
             )
 

@@ -13,12 +13,12 @@ import retrofit2.http.GET
  * Created by Hojat Ghasemi at 2022-04-24
  * Contact the author at "https://github.com/hojat72elect"
  */
-interface RemoteDataSource {
+interface NetworkModel {
 
 
     // I have to define this function with suspend; otherwise it threw some weird errors.
     @GET("/photos/?client_id=_htwco9giNp8TaA8kshIB3VP0eUZq5Y4pFWHLQuNPRU")
-    suspend fun getPhotos(): Response<UnsplashJSON>
+    suspend fun getUnsplashPhotos(): Response<UnsplashJSON>
 
     companion object {
         const val BASE_URL = "https://api.unsplash.com/"

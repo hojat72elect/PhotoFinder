@@ -2,13 +2,13 @@ package ca.sudbury.hojat.photofinder.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ca.sudbury.hojat.photofinder.framework.PhotoDataSourceImpl
+import ca.sudbury.hojat.photofinder.framework.RemotePhotoDataSource
 
 /**
  * Created by Hojat Ghasemi at 2022-04-26
  * Contact the author at "https://github.com/hojat72elect"
  */
-class UnsplashViewModelFactory(private val repository: PhotoDataSourceImpl) :
+class UnsplashViewModelFactory(private val repository: RemotePhotoDataSource) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 

@@ -2,7 +2,7 @@ package ca.sudbury.hojat.photofinder.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import ca.sudbury.hojat.photofinder.framework.RemotePhotoDataSource
+import ca.sudbury.hojat.photofinder.framework.web.RemotePhotoDataSource
 import kotlinx.coroutines.Dispatchers
 
 /**

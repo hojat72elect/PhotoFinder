@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.R
 import ca.sudbury.hojat.photofinder.databinding.ActivityMainBinding
-import ca.sudbury.hojat.photofinder.framework.RemotePhotoDataSource
+import ca.sudbury.hojat.photofinder.framework.web.RemotePhotoDataSource
 
 
 class MainActivity : AppCompatActivity() {

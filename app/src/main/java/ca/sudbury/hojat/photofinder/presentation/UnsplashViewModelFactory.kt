@@ -2,7 +2,7 @@ package ca.sudbury.hojat.photofinder.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ca.sudbury.hojat.photofinder.framework.RemotePhotoDataSource
+import ca.sudbury.hojat.photofinder.framework.web.RemotePhotoDataSource
 
 /**
  * Created by Hojat Ghasemi at 2022-04-26

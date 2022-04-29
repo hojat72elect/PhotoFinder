@@ -1,9 +1,8 @@
-package ca.sudbury.hojat.photofinder.framework
+package ca.sudbury.hojat.photofinder.framework.web
 
 
 import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
-import ca.sudbury.hojat.photofinder.framework.web.NetworkModel
 import ca.sudbury.hojat.photofinder.toPhoto
 
 /**

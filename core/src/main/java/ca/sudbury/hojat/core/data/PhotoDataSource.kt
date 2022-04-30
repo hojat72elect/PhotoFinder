@@ -1,6 +1,7 @@
 package ca.sudbury.hojat.core.data
 
 import ca.sudbury.hojat.core.domain.Photo
+import kotlin.properties.ObservableProperty
 
 /**
  * Created by Hojat Ghasemi at 2022-04-24
@@ -15,5 +16,6 @@ interface PhotoDataSource {
     suspend fun deletePhoto(photo: Photo)
 
     suspend fun addPhoto(photo: Photo)
+
 
 }

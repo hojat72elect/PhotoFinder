@@ -3,20 +3,27 @@ package ca.sudbury.hojat.photofinder.framework.web
 
 import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
+import ca.sudbury.hojat.photofinder.framework.web.data.UnsplashJSON
 import ca.sudbury.hojat.photofinder.toPhoto
+import io.reactivex.Observable
+import retrofit2.Response
+import kotlin.properties.ObservableProperty
 
 /**
  * Created by Hojat Ghasemi at 2022-04-24
  * contact the author at "https://github.com/hojat72elect"
  */
 class RemotePhotoDataSource() : PhotoDataSource {
+    private val accessKey = "_htwco9giNp8TaA8kshIB3VP0eUZq5Y4pFWHLQuNPRU"
+
     override suspend fun getPhotos(): List<Photo> {
 
         val photosList = mutableListOf<Photo>()
 
-        val JSONBody = NetworkModel.getRetrofitInstance()
-            .create(NetworkModel::class.java)
-            .getUnsplashPhotos()
+
+        val JSONBody = NetworkEndpoints.getRetrofitInstance()
+            .create(NetworkEndpoints::class.java)
+            .getPhotos()
             .body()
             ?.listIterator()
 

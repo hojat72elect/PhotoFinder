@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.R
@@ -27,11 +27,9 @@ class MainActivity : AppCompatActivity() {
             this, R.layout.activity_main
         ) // for easy connection of Activity with xml files.
 
-        // Creating the view model
-//        unsplashViewModel =
-//            ViewModelProvider(this, UnsplashViewModelFactory(RemotePhotoDataSource())).get(
-//                UnsplashViewModel::class.java
-//            )
+
+        unsplashViewModel =
+            ViewModelProviders.of(this, UnsplashViewModelFactory).get(UnsplashViewModel::class.java)
 
 
 
@@ -51,12 +49,13 @@ class MainActivity : AppCompatActivity() {
         adapter = PhotosRecyclerViewAdapter { selectedItem: Photo -> listItemClicked(selectedItem) }
         binding.photosRecyclerView.adapter = adapter // loading the adapter for our recycler view
 
-//        val photos = unsplashViewModel.getAllPhotos()
-//        Log.d(TAG, photos.toString())
-//        photos.observe(this) {
-//            adapter.setList(it)
-//            adapter.notifyDataSetChanged()
-//        }
+        val photos = unsplashViewModel.getAllRemotePhotos()
+        photos.observe(this) {
+            adapter.setList(it)
+            adapter.notifyDataSetChanged()
+        }
+
+
     }
 
     private fun listItemClicked(photo: Photo) {

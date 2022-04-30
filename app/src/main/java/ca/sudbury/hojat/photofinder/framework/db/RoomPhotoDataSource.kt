@@ -19,7 +19,7 @@ class RoomPhotoDataSource(context: Context) : PhotoDataSource {
         it.toPhoto()
     }
 
-    override suspend fun getPhoto(uuid: String): Photo = photoDAO.getPhoto(uuid).toPhoto()
+    override suspend fun getPhoto(uuid: String): Photo = photoDAO.getMyPhoto(uuid).toPhoto()
 
     override suspend fun deletePhoto(photo: Photo) = photoDAO.deletePhoto(photo.toPhotoEntity())
 

@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ca.sudbury.hojat.photofinder.framework.PhotoRepository
-import java.lang.IllegalStateException
 
 /**
  * Created by Hojat Ghasemi at 2022-04-26
@@ -21,17 +20,15 @@ object UnsplashViewModelFactory : ViewModelProvider.Factory {
         UnsplashViewModelFactory.repository = repository
     }
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(UnsplashViewModel::class.java.isAssignableFrom(modelClass)){
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (UnsplashViewModel::class.java.isAssignableFrom(modelClass)) {
             return modelClass.getConstructor(Application::class.java, repository::class.java)
                 .newInstance(
                     application,
                     repository
                 )
-        }else{
+        } else {
             throw IllegalStateException("ViewModel must extend UnsplahViewModel")
         }
     }
-
-
 }

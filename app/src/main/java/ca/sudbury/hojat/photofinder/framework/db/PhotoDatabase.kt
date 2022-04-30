@@ -33,5 +33,7 @@ abstract class PhotoDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun photoDao(): PhotoDAO
+    fun photoDao(): PhotoDAO {
+        return photoDAO
+    }
 }

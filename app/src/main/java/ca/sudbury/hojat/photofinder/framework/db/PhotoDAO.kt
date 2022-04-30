@@ -25,5 +25,5 @@ interface PhotoDAO {
     fun getAllPhotos(): List<PhotoEntity>
 
     @Query("SELECT * FROM photo_data_table WHERE photo_uuid = :uuid")
-    fun getPhoto(uuid: String): PhotoEntity
+    fun getMyPhoto(uuid: String): PhotoEntity
 }

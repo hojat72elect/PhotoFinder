@@ -1,21 +1,37 @@
 package ca.sudbury.hojat.photofinder.presentation
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ca.sudbury.hojat.photofinder.framework.web.RemotePhotoDataSource
+import ca.sudbury.hojat.photofinder.framework.PhotoRepository
+import java.lang.IllegalStateException
 
 /**
  * Created by Hojat Ghasemi at 2022-04-26
  * Contact the author at "https://github.com/hojat72elect"
  */
-class UnsplashViewModelFactory(private val repository: RemotePhotoDataSource) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+object UnsplashViewModelFactory : ViewModelProvider.Factory {
 
-        // boilerplate that will be used for all ViewModel factories
-        if (modelClass.isAssignableFrom(UnsplashViewModel::class.java)) {
-            return UnsplashViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown View Model class")
+    lateinit var application: Application
+    lateinit var repository: PhotoRepository
+
+
+    fun inject(application: Application, repository: PhotoRepository) {
+        UnsplashViewModelFactory.application = application
+        UnsplashViewModelFactory.repository = repository
     }
+
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if(UnsplashViewModel::class.java.isAssignableFrom(modelClass)){
+            return modelClass.getConstructor(Application::class.java, repository::class.java)
+                .newInstance(
+                    application,
+                    repository
+                )
+        }else{
+            throw IllegalStateException("ViewModel must extend UnsplahViewModel")
+        }
+    }
+
+
 }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PhotoFinder</string>
     <string name="photo">photo</string>
+    <string name="photo_description">The photo which was chosen by user</string>
 </resources>

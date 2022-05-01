@@ -1,6 +1,7 @@
 package ca.sudbury.hojat.photofinder.presentation
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.R
 import ca.sudbury.hojat.photofinder.databinding.ActivityMainBinding
 
+const val EXTRA_PHOTO_ID = "ca.sudbury.hojat.photofinder.presentation.photoId"
 
 class MainActivity : AppCompatActivity() {
 
@@ -78,8 +80,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun listItemClicked(photo: Photo) {
-        Toast.makeText(this, "$photo selected", Toast.LENGTH_SHORT).show()
 
+        val intent = Intent(this, PhotoDetailsActivity::class.java).apply {
+            putExtra(EXTRA_PHOTO_ID, photo.id)
+        }
+        startActivity(intent)
     }
 
 }

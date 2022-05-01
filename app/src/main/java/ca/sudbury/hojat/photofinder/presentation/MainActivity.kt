@@ -48,11 +48,31 @@ class MainActivity : AppCompatActivity() {
         adapter = PhotosRecyclerViewAdapter { selectedItem: Photo -> listItemClicked(selectedItem) }
         binding.photosRecyclerView.adapter = adapter // loading the adapter for our recycler view
 
-        val photos = unsplashViewModel.getAllRemotePhotos()
-        photos.observe(this) {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-        }
+        // first load photos out of Room DB
+        unsplashViewModel.getAllRoomPhotos().observe(this, { roomPhotos ->
+            if (roomPhotos.isEmpty()) {
+                // Room DB is empty
+                // fetch photos from web server
+                unsplashViewModel.getAllRemotePhotos().observe(this, { remotePhotos: List<Photo>
+                    ->
+                    adapter.setList(remotePhotos)
+                    adapter.notifyDataSetChanged()
+                    Toast.makeText(this, "Data loaded from server", Toast.LENGTH_LONG).show()
+                    // save the data you have downloaded from web server, into Room DB
+                    remotePhotos.forEach {
+                        unsplashViewModel.addRoomPhoto(it)
+                    }
+
+                })
+
+
+            } else {
+                // load the recycler view with data from Room DB
+                adapter.setList(roomPhotos)
+                adapter.notifyDataSetChanged()
+                Toast.makeText(this, "Data loaded from Room database", Toast.LENGTH_LONG).show()
+            }
+        })
 
 
     }

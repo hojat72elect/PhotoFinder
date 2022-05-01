@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.R
@@ -29,8 +29,7 @@ class MainActivity : AppCompatActivity() {
 
 
         unsplashViewModel =
-            ViewModelProviders.of(this, UnsplashViewModelFactory).get(UnsplashViewModel::class.java)
-
+            ViewModelProvider(this, UnsplashViewModelFactory)[UnsplashViewModel::class.java]
 
 
         // the binding between ViewModel and UI is controlled by the lifecycle of this Activity
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun listItemClicked(photo: Photo) {
-        Toast.makeText(this, "photo selected", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "$photo selected", Toast.LENGTH_SHORT).show()
 
     }
 

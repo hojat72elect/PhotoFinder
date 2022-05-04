@@ -1,6 +1,7 @@
 package ca.sudbury.hojat.photofinder.framework.web
 
 import ca.sudbury.hojat.photofinder.framework.web.data.UnsplashJSON
+import ca.sudbury.hojat.photofinder.framework.web.newdata.NewUnsplashPhoto
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -22,13 +23,15 @@ interface NetworkEndpoints {
     @GET("/photos/?client_id=_htwco9giNp8TaA8kshIB3VP0eUZq5Y4pFWHLQuNPRU&per_page=30")
     suspend fun getPhotos(): Response<UnsplashJSON>
 
-    // The other more versatile functions:
+    /**
+     * This is the new getter method from server; I'm going to do all Unsplash normal fetches with this method.
+     */
     @GET("collections/317099/photos")
-    fun getPhotosObservable(
+    fun loadPhotosObservable(
         @Query("client_id") clientId: String,
         @Query("page") page: Int,
         @Query("per_page") pageSize: Int
-    ): Observable<Response<UnsplashJSON>>
+    ): Observable<Response<List<NewUnsplashPhoto>>>
 
     companion object {
         const val BASE_URL = "https://api.unsplash.com/"

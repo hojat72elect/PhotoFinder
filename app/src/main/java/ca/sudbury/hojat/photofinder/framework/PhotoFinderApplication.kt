@@ -10,6 +10,10 @@ import ca.sudbury.hojat.photofinder.presentation.UnsplashViewModelFactory
  * Contact the author at "https://github.com/hojat72elect"
  */
 class PhotoFinderApplication : Application() {
+
+internal val accessKey="_htwco9giNp8TaA8kshIB3VP0eUZq5Y4pFWHLQuNPRU"
+internal val secretKey="2LCXsb9sP2coqIQ0McGNzgWJZsPVLL6Lcvr-HGO5Ydc"
+
     override fun onCreate() {
         super.onCreate()
         val photoRepository = PhotoRepository(RoomPhotoDataSource(this), RemotePhotoDataSource())

@@ -25,9 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.PhotoDetailsActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".presentation.PhotoDetailsActivity"-->
+<!--            android:exported="false" />-->
     </application>
 
 </manifest>

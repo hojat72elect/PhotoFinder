@@ -1,7 +1,7 @@
 package ca.sudbury.hojat.photofinder.framework
 
 import android.app.Application
-import ca.sudbury.hojat.photofinder.framework.db.RoomPhotoDataSource
+//import ca.sudbury.hojat.photofinder.framework.db.RoomPhotoDataSource
 import ca.sudbury.hojat.photofinder.framework.web.RemotePhotoDataSource
 import ca.sudbury.hojat.photofinder.presentation.UnsplashViewModelFactory
 
@@ -12,7 +12,9 @@ import ca.sudbury.hojat.photofinder.presentation.UnsplashViewModelFactory
 class PhotoFinderApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        val photoRepository = PhotoRepository(RoomPhotoDataSource(this), RemotePhotoDataSource())
+        val photoRepository = PhotoRepository(
+//            RoomPhotoDataSource(this),
+            RemotePhotoDataSource())
 
         UnsplashViewModelFactory.inject(this, photoRepository)
 

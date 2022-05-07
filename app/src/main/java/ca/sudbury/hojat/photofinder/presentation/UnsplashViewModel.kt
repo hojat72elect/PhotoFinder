@@ -21,23 +21,23 @@ class UnsplashViewModel(application: Application, private val repository: PhotoR
         emit(repository.getAllRemotePhotos())
     }
 
-    fun getAllRoomPhotos() = liveData(Dispatchers.IO) {
-        emit(repository.getAllRoomPhotos())
-    }
+//    fun getAllRoomPhotos() = liveData(Dispatchers.IO) {
+//        emit(repository.getAllRoomPhotos())
+//    }
 
-    fun getRoomPhoto(photoId: String) = liveData(Dispatchers.IO) {
-        emit(repository.getRoomPhoto(photoId))
-    }
+//    fun getRoomPhoto(photoId: String) = liveData(Dispatchers.IO) {
+//        emit(repository.getRoomPhoto(photoId))
+//    }
 
-    fun deleteRoomPhoto(photo: Photo) {
-        viewModelScope.launch {
-            repository.deleteRoomPhoto(photo)
-        }
-    }
+//    fun deleteRoomPhoto(photo: Photo) {
+//        viewModelScope.launch {
+//            repository.deleteRoomPhoto(photo)
+//        }
+//    }
 
-    fun addRoomPhoto(photo: Photo) {
-        viewModelScope.launch {
-            repository.addRoomPhoto(photo)
-        }
-    }
+//    fun addRoomPhoto(photo: Photo) {
+//        viewModelScope.launch {
+//            repository.addRoomPhoto(photo)
+//        }
+//    }
 }

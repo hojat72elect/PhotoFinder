@@ -1,7 +1,6 @@
 package ca.sudbury.hojat.photofinder.presentation
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -51,40 +50,55 @@ class MainActivity : AppCompatActivity() {
         binding.photosRecyclerView.adapter = adapter // loading the adapter for our recycler view
 
         // first load photos out of Room DB
-        unsplashViewModel.getAllRoomPhotos().observe(this, { roomPhotos ->
-            if (roomPhotos.isEmpty()) {
-                // Room DB is empty
-                // fetch photos from web server
-                unsplashViewModel.getAllRemotePhotos().observe(this, { remotePhotos: List<Photo>
-                    ->
-                    adapter.setList(remotePhotos)
-                    adapter.notifyDataSetChanged()
-                    Toast.makeText(this, "Data loaded from server", Toast.LENGTH_LONG).show()
-                    // save the data you have downloaded from web server, into Room DB
-                    remotePhotos.forEach {
-                        unsplashViewModel.addRoomPhoto(it)
-                    }
+//        unsplashViewModel.getAllRoomPhotos().observe(this, { roomPhotos ->
+//            if (roomPhotos.isEmpty()) {
+//                // Room DB is empty
+//                // fetch photos from web server
+//                unsplashViewModel.getAllRemotePhotos().observe(this, { remotePhotos: List<Photo>
+//                    ->
+//                    adapter.setList(remotePhotos)
+//                    adapter.notifyDataSetChanged()
+//                    Toast.makeText(this, "Data loaded from server", Toast.LENGTH_LONG).show()
+//                    // save the data you have downloaded from web server, into Room DB
+//                    remotePhotos.forEach {
+//                        unsplashViewModel.addRoomPhoto(it)
+//                    }
+//
+//                })
+//
+//
+//            } else {
+//                // load the recycler view with data from Room DB
+//                adapter.setList(roomPhotos)
+//                adapter.notifyDataSetChanged()
+//                Toast.makeText(this, "Data loaded from Room database", Toast.LENGTH_LONG).show()
+//            }
+//        })
 
-                })
 
+        // Room DB is empty
+        // fetch photos from web server
+        unsplashViewModel.getAllRemotePhotos().observe(this, { remotePhotos: List<Photo>
+            ->
+            adapter.setList(remotePhotos)
+            adapter.notifyDataSetChanged()
+            Toast.makeText(this, "Data loaded from server", Toast.LENGTH_LONG).show()
 
-            } else {
-                // load the recycler view with data from Room DB
-                adapter.setList(roomPhotos)
-                adapter.notifyDataSetChanged()
-                Toast.makeText(this, "Data loaded from Room database", Toast.LENGTH_LONG).show()
-            }
         })
 
 
     }
 
-    private fun listItemClicked(photo: Photo) {
+    private fun listItemClicked(
+        photo: Photo
+    ) {
 
-        val intent = Intent(this, PhotoDetailsActivity::class.java).apply {
-            putExtra(EXTRA_PHOTO_ID, photo.id)
-        }
-        startActivity(intent)
+//        val intent = Intent(this, PhotoDetailsActivity::class.java).apply {
+//            putExtra(EXTRA_PHOTO_ID, photo.id)
+//        }
+//        startActivity(intent)
+
+        Toast.makeText(this, "One of the pics was clicked!", Toast.LENGTH_SHORT).show()
     }
 
 }

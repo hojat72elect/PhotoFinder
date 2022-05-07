@@ -12,7 +12,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoFinder">
         <activity
@@ -28,9 +27,7 @@
         </activity>
         <activity
             android:name=".presentation.PhotoDetailsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            android:exported="false" />
     </application>
 
 </manifest>

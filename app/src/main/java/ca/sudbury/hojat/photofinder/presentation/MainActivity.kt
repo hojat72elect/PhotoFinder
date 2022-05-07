@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.sudbury.hojat.core.domain.Photo
 import ca.sudbury.hojat.photofinder.R
@@ -25,12 +24,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         binding = DataBindingUtil.setContentView(
             this, R.layout.activity_main
         ) // for easy connection of Activity with xml files.
 
+
         unsplashViewModel =
             ViewModelProvider(this, UnsplashViewModelFactory)[UnsplashViewModel::class.java]
+
 
         // the binding between ViewModel and UI is controlled by the lifecycle of this Activity
         binding.myViewModel = unsplashViewModel
@@ -45,18 +47,10 @@ class MainActivity : AppCompatActivity() {
         binding.photosRecyclerView.layoutManager =
             LinearLayoutManager(this)// responsible for measuring, positioning and recycling item views.
 
-        // divider between recycler view rows
-        binding.photosRecyclerView.addItemDecoration(
-            DividerItemDecoration(
-                applicationContext,
-                DividerItemDecoration.VERTICAL
-            )
-        )
-
         adapter = PhotosRecyclerViewAdapter { selectedItem: Photo -> listItemClicked(selectedItem) }
         binding.photosRecyclerView.adapter = adapter // loading the adapter for our recycler view
 
-        // firstly try to load photos out of Room DB
+        // first load photos out of Room DB
         unsplashViewModel.getAllRoomPhotos().observe(this, { roomPhotos ->
             if (roomPhotos.isEmpty()) {
                 // Room DB is empty

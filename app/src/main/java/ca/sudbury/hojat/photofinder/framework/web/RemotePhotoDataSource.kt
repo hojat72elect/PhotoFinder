@@ -3,11 +3,7 @@ package ca.sudbury.hojat.photofinder.framework.web
 
 import ca.sudbury.hojat.core.data.PhotoDataSource
 import ca.sudbury.hojat.core.domain.Photo
-import ca.sudbury.hojat.photofinder.framework.web.data.UnsplashJSON
 import ca.sudbury.hojat.photofinder.toPhoto
-import io.reactivex.Observable
-import retrofit2.Response
-import kotlin.properties.ObservableProperty
 
 /**
  * Created by Hojat Ghasemi at 2022-04-24

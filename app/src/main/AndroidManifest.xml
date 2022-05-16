@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="ca.sudbury.hojat.photofinder">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="ca.sudbury.hojat.photofinder">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application
-        android:name=".framework.PhotoFinderApplication"
-        android:allowBackup="false"
-        android:fullBackupContent="false"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.PhotoFinder">
+    <application android:icon="@mipmap/ic_launcher_round">
         <activity
-            android:name=".presentation.MainActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
+                android:name=".presentation.MainActivity"
+                android:exported="true"
+                android:screenOrientation="portrait"
+                tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

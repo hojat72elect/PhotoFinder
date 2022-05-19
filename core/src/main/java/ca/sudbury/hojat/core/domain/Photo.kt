@@ -13,5 +13,5 @@ data class Photo(
     val likes: Int,
     val description: String?,
     val url_full: String?,
-    val url_regular: String?,
+    val url_regular: String?
 )

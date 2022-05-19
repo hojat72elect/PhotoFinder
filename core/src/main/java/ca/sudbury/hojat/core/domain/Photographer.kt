@@ -15,5 +15,5 @@ data class Photographer(
     val total_collections: Int?,
     val profile_image: String?,
     val for_hire: Boolean?,
-    val social: SocialHandles?,
+    val social: SocialHandles?
 )

@@ -11,6 +11,4 @@ import ca.sudbury.hojat.photofinder.domain.PhotoRepository
 class PhotoViewModel(private val repository: PhotoRepository) : ViewModel() {
 
     fun getAllPhotos() = repository.loadPhotos(PhotoFinder.pageSize)
-
-
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import ca.sudbury.hojat.photofinder.data.NetworkEndpoints
 import ca.sudbury.hojat.photofinder.data.UnsplashPhoto
-import ca.sudbury.hojat.photofinder.presentation.PhotoFinder
+import ca.sudbury.hojat.photofinder.PhotoFinder
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import retrofit2.Response

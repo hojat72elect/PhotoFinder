@@ -1,4 +1,4 @@
-package ca.sudbury.hojat.photofinder.presentation
+package ca.sudbury.hojat.photofinder
 
 /**
  * Created by Hojat Ghasemi at 2022-05-16

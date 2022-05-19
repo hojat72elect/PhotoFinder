@@ -1,6 +1,7 @@
 package ca.sudbury.hojat.photofinder.presentation
 
 import androidx.lifecycle.ViewModel
+import ca.sudbury.hojat.photofinder.PhotoFinder
 import ca.sudbury.hojat.photofinder.domain.PhotoRepository
 
 /**

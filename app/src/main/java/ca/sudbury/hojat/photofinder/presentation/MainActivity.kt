@@ -8,10 +8,12 @@ import ca.sudbury.hojat.photofinder.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
 //    private lateinit var myViewModel: PhotoViewModel
+    private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         binding.button.text = "click me as hard as you can!"
         setContentView(binding.root)
 

@@ -9,6 +9,8 @@ class MainActivity : AppCompatActivity() {
 
 //    private lateinit var myViewModel: PhotoViewModel
     private lateinit var binding: ActivityMainBinding
+    private lateinit var myViewModel: PhotoViewModel
+    private val TAG = "Main_Activity"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.button.text = "click me as hard as you can!"
         setContentView(binding.root)
+
+
 
     }
 

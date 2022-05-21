@@ -12,12 +12,21 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
  * Manual dependency injection to avoid sticking to a specific dependency injection library.
+ *
+ * Created by Hojat Ghasemi at 2022-05-16
+ * Contact the author at "https://github.com/hojat72elect"
  */
 object Injector {
 
+    internal const val accessKey = "_htwco9giNp8TaA8kshIB3VP0eUZq5Y4pFWHLQuNPRU"
+    internal const val secretKey = "2LCXsb9sP2coqIQ0McGNzgWJZsPVLL6Lcvr-HGO5Ydc"
     private const val CONTENT_TYPE = "Content-Type"
     private const val APPLICATION_JSON = "application/json"
     private const val ACCEPT_VERSION = "Accept-Version"
+    private const val DEFAULT_PAGE_SIZE = 20
+    private var pageSize: Int = DEFAULT_PAGE_SIZE
+    private var isLoggingEnabled = false
+
 
     private fun createHeaderInterceptor(): Interceptor {
         return Interceptor { chain ->
@@ -39,7 +48,7 @@ object Injector {
         val builder = OkHttpClient.Builder()
         builder.addNetworkInterceptor(createHeaderInterceptor())
 
-        if (PhotoFinder.isLoggingEnabled()) {
+        if (isLoggingEnabled()) {
             builder.addNetworkInterceptor(createLoggingInterceptor())
         }
 
@@ -64,5 +73,17 @@ object Injector {
 
     fun createPickerViewModelFactory(): PhotoViewModelFactory {
         return PhotoViewModelFactory(createRepository())
+    }
+
+    fun getPageSize(): Int {
+        return pageSize
+    }
+
+    fun setLoggingEnabled(isEnabled: Boolean) {
+        isLoggingEnabled = isEnabled
+    }
+
+    fun isLoggingEnabled(): Boolean {
+        return isLoggingEnabled
     }
 }

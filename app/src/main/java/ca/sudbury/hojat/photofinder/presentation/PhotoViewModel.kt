@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
-import ca.sudbury.hojat.photofinder.PhotoFinder
+import ca.sudbury.hojat.photofinder.Injector
 import ca.sudbury.hojat.photofinder.data.UnsplashPhoto
 import ca.sudbury.hojat.photofinder.domain.PhotoRepository
 import io.reactivex.Observer
@@ -21,7 +21,7 @@ class PhotoViewModel(private val repository: PhotoRepository) : ViewModel() {
     val photosLiveData: LiveData<PagedList<UnsplashPhoto>> get() = mPhotosLiveData
 
     fun registerPhotosLiveData() = repository
-        .loadPhotos(PhotoFinder.getPageSize())
+        .loadPhotos(Injector.getPageSize())
         .subscribe(object : Observer<PagedList<UnsplashPhoto>> {
             override fun onSubscribe(d: Disposable) {
                 //todo: take care of the disposable

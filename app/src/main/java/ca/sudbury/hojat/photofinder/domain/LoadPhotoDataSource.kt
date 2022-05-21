@@ -3,9 +3,9 @@ package ca.sudbury.hojat.photofinder.domain
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
+import ca.sudbury.hojat.photofinder.Injector
 import ca.sudbury.hojat.photofinder.data.NetworkEndpoints
 import ca.sudbury.hojat.photofinder.data.UnsplashPhoto
-import ca.sudbury.hojat.photofinder.PhotoFinder
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import retrofit2.Response
@@ -28,7 +28,7 @@ class LoadPhotoDataSource(private val networkEndpoints: NetworkEndpoints) :
         //first time that a page is being loaded
         networkState.postValue(NetworkState.LOADING)
         networkEndpoints.loadPhotos(
-            PhotoFinder.accessKey,
+            Injector.accessKey,
             1,
             params.requestedLoadSize
         ).subscribe(
@@ -72,7 +72,7 @@ class LoadPhotoDataSource(private val networkEndpoints: NetworkEndpoints) :
         // all the future pages of the response that are being loaded.
         networkState.postValue(NetworkState.LOADING)
         networkEndpoints.loadPhotos(
-            PhotoFinder.accessKey,
+            Injector.accessKey,
             params.key,
             params.requestedLoadSize
         ).subscribe(object : Observer<Response<List<UnsplashPhoto>>> {

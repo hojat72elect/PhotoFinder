@@ -51,7 +51,7 @@ class HojatPhotosRecyclerViewAdapter(
 
 }
 
-class PhotoViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class PhotoViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(photo: UnsplashPhoto, clickListener: (UnsplashPhoto) -> Unit) {
         Glide.with(binding.root.context)
             .load(Uri.parse(photo.links.self))

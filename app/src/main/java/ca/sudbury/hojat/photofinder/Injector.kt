@@ -2,9 +2,7 @@ package ca.sudbury.hojat.photofinder
 
 import ca.sudbury.hojat.photofinder.data.NetworkEndpoints
 import ca.sudbury.hojat.photofinder.domain.PhotoRepository
-import ca.sudbury.hojat.photofinder.presentation.PhotoViewModel
 import ca.sudbury.hojat.photofinder.presentation.PhotoViewModelFactory
-import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -40,12 +38,11 @@ object Injector {
     private fun createHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
         builder.addNetworkInterceptor(createHeaderInterceptor())
+
         if (PhotoFinder.isLoggingEnabled()) {
             builder.addNetworkInterceptor(createLoggingInterceptor())
         }
-        val cacheSize = 10 * 1024 * 1024 // 10 MB of cache
-        val cache = Cache(PhotoFinder.getApplication().cacheDir, cacheSize.toLong())
-        builder.cache(cache)
+
         return builder.build()
     }
 

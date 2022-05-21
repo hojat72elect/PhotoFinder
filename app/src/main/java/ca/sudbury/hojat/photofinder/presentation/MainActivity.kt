@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         myViewModel.photosLiveData.observe(this, Observer {
 
-            Log.d("Resulting_Photo", it[2]?.links?.html.toString())
+            Log.d("Resulting_Photo", it.toString())
         })
 
         myViewModel.registerPhotosLiveData()

@@ -11,6 +11,9 @@ import com.bumptech.glide.Glide
 /**
  * Created by Hojat Ghasemi at 2022-05-19
  * Contact the author at "https://github.com/hojat72elect"
+ *
+ * todo: this RecyclerView.Adapter needs to be changed in
+ *  a way that it can support paged data.
  */
 class HojatPhotosRecyclerViewAdapter(
     private val clickListener: (UnsplashPhoto) -> Unit

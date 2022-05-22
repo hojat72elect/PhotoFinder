@@ -39,7 +39,7 @@ class LoadPhotoDataSource(private val networkEndpoints: NetworkEndpoints) :
 
                 override fun onNext(response: Response<List<UnsplashPhoto>>) {
                     if (response.isSuccessful) {
-                        totalPages = response.headers().get("x-total")?.toInt()
+                        totalPages = response.headers()["x-total"]?.toInt()
                             ?.div(params.requestedLoadSize)
                         callback.onResult(response.body()!!, null, 2)
                         networkState.postValue(NetworkState.SUCCESS)

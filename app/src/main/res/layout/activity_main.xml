@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.MainActivity">
-
-    <data>
-        <!--This helps us to create a binding for controlling this UI
-         easier. Don't forget to define one specific lifecycleOwner for
-          this binding; otherwise you might face memory leaks.
-        .-->
-        <variable
-            name="myViewModel"
-            type="ca.sudbury.hojat.photofinder.presentation.UnsplashViewModel" />
-    </data>
+<layout>
 
     <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".presentation.MainActivity">
 
         <TextView
             android:id="@+id/text_view_log"

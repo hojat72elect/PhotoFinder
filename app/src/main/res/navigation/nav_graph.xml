@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/popular_photos_fragment">
+
+    <fragment
+        android:id="@+id/popular_photos_fragment"
+        android:name="ca.sudbury.hojat.photofinder.presentation.fragment.PopularPhotosFragment"
+        android:label="Popular Photos"
+        tools:layout="@layout/popular_photos_fragment">
+        <action
+            android:id="@+id/action_popular_photos_fragment_to_photo_details_fragment"
+            app:destination="@id/photo_details_fragment">
+            <argument
+                android:name="photoDetails"
+                app:argType="ca.sudbury.hojat.photofinder.data.datamodel.PhotoDetails" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/photo_details_fragment"
+        android:name="ca.sudbury.hojat.photofinder.presentation.fragment.PhotoDetailsFragment"
+        android:label="Photo Details"
+        tools:layout="@layout/fragment_photo_details">
+        <action
+            android:id="@+id/action_photo_details_fragment_to_popular_photos_fragment"
+            app:popUpTo="@id/popular_photos_fragment" />
+    </fragment>
+
+</navigation>

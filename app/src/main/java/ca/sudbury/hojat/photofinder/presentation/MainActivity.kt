@@ -21,6 +21,5 @@ class MainActivity : AppCompatActivity() {
                 this, R.layout.activity_main
         ) // for easy connection of Activity with xml files.
 
-        binding.textViewLog.text = "photo finder is back to its initial state"
     }
 }

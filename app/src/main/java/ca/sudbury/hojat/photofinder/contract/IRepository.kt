@@ -6,12 +6,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 
 /**
- * The repository class represents the data store of the application. This class is primarily utilised
- * when building offline-first applications where it will make the determination to load the data from
- * a local Room DB vs calling the retrofit function in order to obtain the data
- * @author Prasan
- * @since 1.0
- * @see IRemoteDataSource
+ * The class that implements this interface represents the data store
+ * of the application and decides whether to load the data from
+ * a local Room DB or calling the retrofit function, or getting needed data
+ * from any other data source (such as cache or another module and so on).
+ *
+ * @author Hojat Ghasemi
  */
 interface IRepository {
 

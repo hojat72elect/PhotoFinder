@@ -20,8 +20,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
  * Hilt Module class that builds our dependency graph
- * @author Prasan
- * @since 1.0
+ * @author Hojat Ghasemi
  */
 @InstallIn(ActivityComponent::class)
 @Module
@@ -113,4 +112,12 @@ object HiltDependenciesModule {
         GetPopularPhotosUseCase(
             repository
         )
+
+//    @Provides
+//    fun providesMainViewModel(
+//        activity: MainActivity,
+//        factory: ViewModelProvider.Factory
+//    ): MainViewModel {
+//        return ViewModelProvider(activity, factory).get(MainViewModel::class.java)
+//    }
 }

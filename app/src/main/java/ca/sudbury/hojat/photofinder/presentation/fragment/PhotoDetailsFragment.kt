@@ -6,19 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import ca.sudbury.hojat.photofinder.ViewState
 import ca.sudbury.hojat.photofinder.databinding.FragmentPhotoDetailsBinding
 import ca.sudbury.hojat.photofinder.presentation.MainViewModel
 import ca.sudbury.hojat.photofinder.showToast
 
 
-
 /**
  * [Fragment] displays details of the photo tapped on in [PopularPhotosFragment]
- * @author Prasan
- * @since 1.0
- * @see [MainViewModel]
+ * @author Hojat Ghasemi
  */
 class PhotoDetailsFragment : Fragment() {
 
@@ -28,7 +24,7 @@ class PhotoDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPhotoDetailsBinding.inflate(inflater)
         retainInstance = true
         return binding.root
@@ -38,14 +34,15 @@ class PhotoDetailsFragment : Fragment() {
 
         arguments?.let {
             viewModel.processPhotoDetailsArgument(it)
-                .observe(viewLifecycleOwner, Observer { uiState ->
+                .observe(viewLifecycleOwner) { uiState ->
                     when (uiState) {
                         is ViewState.RenderSuccess ->
                             binding.photoDetails = uiState.output
                         is ViewState.RenderFailure ->
                             context?.showToast(uiState.throwable.message!!)
+                        else -> {}
                     }
-                })
+                }
         } ?: context?.showToast("Invalid data")
     }
 }

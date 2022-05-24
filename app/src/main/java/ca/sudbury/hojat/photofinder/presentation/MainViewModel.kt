@@ -23,8 +23,6 @@ import kotlinx.coroutines.launch
  * methods to show the list of popular photos in a paginated fashion as well as to parse the [Bundle]
  * arguments to show details of the page. In this app architecture, a single ViewModel is shared between
  * all fragments in the application
- * @author Prasan
- * @since 1.0
  */
 class MainViewModel @ViewModelInject constructor(
     private val getPopularPhotosUseCase: GetPopularPhotosUseCase

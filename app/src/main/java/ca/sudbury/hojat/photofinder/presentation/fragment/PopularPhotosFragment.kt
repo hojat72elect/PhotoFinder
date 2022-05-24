@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ca.sudbury.hojat.photofinder.*
@@ -15,19 +14,16 @@ import ca.sudbury.hojat.photofinder.data.datamodel.PhotoDetails
 import ca.sudbury.hojat.photofinder.databinding.PopularPhotosFragmentBinding
 import ca.sudbury.hojat.photofinder.presentation.MainViewModel
 import ca.sudbury.hojat.photofinder.presentation.PopularPhotosAdapter
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * This [Fragment] displays a list of popular photos from 500px in a paginated fashion, the next page of data
  * is loaded when the scrolling of the current list of items is at its end. On loading, the API calls the first
  * page of data.
- * @author Prasan
- * @since 1.0
- * @see [MainViewModel]
+ * @author Hojat Ghasemi
  */
 class PopularPhotosFragment : Fragment() {
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val myViewModel: MainViewModel by activityViewModels() // todo: the view model is not initialized correctly.
     private lateinit var binding: PopularPhotosFragmentBinding
     private val photoItemClickListener: ListItemClickListener<Photo> = {
         val photoDetails = PhotoDetails(
@@ -48,20 +44,19 @@ class PopularPhotosFragment : Fragment() {
                 PopularPhotosFragmentDirections
                     .actionPopularPhotosFragmentToPhotoDetailsFragment(photoDetails)
             )
-        viewModel.navigatingFromDetails = true
+        myViewModel.navigatingFromDetails = true
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = PopularPhotosFragmentBinding.inflate(inflater)
         retainInstance = true
         return binding.root
     }
 
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -71,12 +66,13 @@ class PopularPhotosFragment : Fragment() {
 
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    viewModel.onRecyclerViewScrolledToBottom()
+                    myViewModel.onRecyclerViewScrolledToBottom()
                 }
             }
         })
 
-        viewModel.popularPhotosLiveData.observe(viewLifecycleOwner, Observer { viewState ->
+        myViewModel.popularPhotosLiveData.observe(viewLifecycleOwner) { viewState ->
+            // todo: the view model used above is not initialized correctly.
             when (viewState) {
 
                 is ViewState.Loading ->
@@ -100,7 +96,7 @@ class PopularPhotosFragment : Fragment() {
                         viewState.output
                 }
             }
-        })
-        viewModel.getPhotosNextPage()
+        }
+        myViewModel.getPhotosNextPage()
     }
 }
